@@ -1,15 +1,36 @@
 import React from "react";
-import { gql } from "apollo-boost";
+import styled, { ThemeProvider } from "styled-components";
+import { HashRouter as Router } from "react-router-dom";
 import { useQuery } from "react-apollo-hooks";
+import { gql } from "apollo-boost";
 
-const Say_Hello = gql`
+import Theme from "../Styles/Theme";
+import Header from "../Components/Header";
+import Routes from "../Routes/Route";
+
+const QUERY = gql`
   {
-    sayHello
+    isLoggedIn @client
   }
 `;
 
 export default () => {
-  const { data, loading } = useQuery(Say_Hello);
+  const {
+    data: { isLoggedIn }
+  } = useQuery(QUERY);
 
-  return loading ? <div>wating</div> : <div>{data.sayHello}</div>;
+  return (
+    <ThemeProvider theme={Theme}>
+      <Router>
+        <Header />
+        <Routes isLoggedIn={isLoggedIn}></Routes>
+      </Router>
+    </ThemeProvider>
+  );
 };
+
+const Wrapper = styled.div`
+  margin: 0 auto;
+  max-width: ${props => props.theme.maxWidth};
+  width: 100%;
+`;

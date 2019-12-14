@@ -1,22 +1,18 @@
 import { GraphQLServer } from "graphql-yoga";
 import { gql } from "apollo-boost";
+import logger from "morgan";
 
-const typeDefs = gql`
-  type Query {
-    sayHello: String!
-  }
-`;
-const resolvers = {
-  Query: {
-    sayHello: () => "Hello"
-  }
-};
+import { isAuthenticated } from "./middlewares";
+import schema from "./schema";
+
+const PORT = process.env.PORT || 4000;
 
 const server = new GraphQLServer({
-  typeDefs,
-  resolvers
+  schema
 });
 
-server.start(() => {
-  console.log(`Server is running on http://localhost:4000`);
+server.express.use(logger("dev"));
+
+server.start({ port: PORT }, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
