@@ -5,32 +5,37 @@ import { useQuery } from "react-apollo-hooks";
 import { gql } from "apollo-boost";
 
 import Theme from "../Styles/Theme";
-import Header from "../Components/Header";
 import Routes from "../Routes/Route";
+import SideNavContainer from "./SideNav/SideNavContainer";
 
-const QUERY = gql`
-  {
-    isLoggedIn @client
-  }
-`;
+// const QUERY = gql`
+//   {
+//     isLoggedIn @client
+//   }
+// `;
 
 export default () => {
-  const {
-    data: { isLoggedIn }
-  } = useQuery(QUERY);
+  // const {
+  //   data: { isLoggedIn }
+  // } = useQuery(QUERY);
 
   return (
     <ThemeProvider theme={Theme}>
       <Router>
-        <Header />
-        <Routes isLoggedIn={isLoggedIn}></Routes>
+        <Container>
+          <SideNavContainer />
+          <Routes isLoggedIn={true}></Routes>
+        </Container>
       </Router>
     </ThemeProvider>
   );
 };
 
-const Wrapper = styled.div`
-  margin: 0 auto;
-  max-width: ${props => props.theme.maxWidth};
+const Container = styled("div")`
+  padding-left: 190px;
+  box-sizing: border-box;
   width: 100%;
+  height: 100vh;
+  overflow-y: hidden;
+  background-color: #f2f4f4;
 `;

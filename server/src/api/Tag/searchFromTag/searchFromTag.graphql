@@ -1,0 +1,3 @@
+type Query {
+  searchFromTag(term: String!): [Tag!]!
+}

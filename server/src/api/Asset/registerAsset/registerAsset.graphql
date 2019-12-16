@@ -1,0 +1,10 @@
+type Mutation {
+  registerAsset(
+    partNumber: String!
+    partName: String!
+    assetNumber: String!
+    assetName: String!
+    stockQuantity: Int!
+    outQuantity: Int!
+  ): Boolean!
+}

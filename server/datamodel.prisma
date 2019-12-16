@@ -1,0 +1,30 @@
+type User {
+  id: ID! @id
+  email: String! @unique
+  firstName: String!
+  lastName: String!
+  middleName: String
+  contactNumber: String  
+  loginSecret: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt 
+}
+
+type Asset {
+  id: ID! @id
+  partNumber: String! @unique
+  partName: String! 
+  assetNumber: String!
+  assetName: String!
+  stockQuantity: Int!
+  outQuantity: Int! @default(value: 0)
+  tag: [Tag!] @relation(name: "Tagging")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Tag {
+  id: ID! @id
+  tagName: String! @unique
+  asset: [Asset!] @relation(name: "Tagging")
+}

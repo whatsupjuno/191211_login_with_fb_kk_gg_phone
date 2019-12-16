@@ -1,0 +1,6 @@
+endpoint: https://us1.prisma.sh/test-project-191214/tset_project_191214/dev
+datamodel: datamodel.prisma
+
+generate:
+  - generator: javascript-client
+    output: ./generated/prisma-client/

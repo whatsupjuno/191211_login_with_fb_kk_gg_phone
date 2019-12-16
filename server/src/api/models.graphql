@@ -1,0 +1,30 @@
+type User {
+  id: ID!
+  email: String!
+  firstName: String!
+  lastName: String!
+  middleName: String
+  contactNumber: String
+  loginSecret: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Asset {
+  id: ID!
+  partNumber: String!
+  partName: String!
+  assetNumber: String!
+  assetName: String!
+  stockQuantity: Int!
+  outQuantity: Int!
+  tag: [Tag!]
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Tag {
+  id: ID!
+  tagName: String!
+  asset: [Asset!]
+}
